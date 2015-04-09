@@ -47,8 +47,6 @@ namespace PhpCommonUtil\Util;
 class Assert
 {
     
-    Assert::isStringOrNull($str);
-    
     /**
      * 
      * @param boolean $expression An expression to test.
