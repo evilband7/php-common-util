@@ -1,6 +1,11 @@
 <?php
 namespace PhpCommonUtil\Collection;
 
+
+/**
+ * store data as a key=>value pair
+ * but looping on priority and first in first out.
+ */
 class PriorityFifoDataCollection
 {
     
@@ -69,6 +74,21 @@ class PriorityFifoDataCollection
         );
     }
     
+    /**
+     * return original key=>value data (ignoring priority)
+     * @return array()
+     */
+    public function getKeyValueMap(){
+        
+        $resultArray = array();
+        foreach ($this->datas as $dataInfo){
+            $id = $dataInfo['id'];
+            $wrappedData = $dataInfo['wrappedData'];
+            $resultArray[$id] = $wrappedData;
+        }
+        return $resultArray;
+    }
+    
     public function getIterator(){
     
         $priorityArray = array();
@@ -91,11 +111,10 @@ class PriorityFifoDataCollection
             }
         }
         return new \ArrayObject($resultArray);
-    
     }
     
 
- /**
+    /**
      * @param boolean $updateExistingOnPut
      */
     public function setUpdateExistingOnPut($updateExistingOnPut)
