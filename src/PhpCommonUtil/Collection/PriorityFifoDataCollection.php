@@ -6,7 +6,7 @@ namespace PhpCommonUtil\Collection;
  * store data as a key=>value pair
  * but looping on priority and first in first out.
  */
-class PriorityFifoDataCollection
+class PriorityFifoDataCollection implements \IteratorAggregate
 {
     
     /**
