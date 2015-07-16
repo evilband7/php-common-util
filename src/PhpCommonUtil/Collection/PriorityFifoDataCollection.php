@@ -104,8 +104,8 @@ class PriorityFifoDataCollection implements \IteratorAggregate
             $priorityArray[$priority][] = $wrappedData;
         }
     
-        $priorityArray = array_reverse($priorityArray);
-        foreach ($priorityArray as $buttons){
+        ksort($priorityArray);
+        foreach (array_reverse($priorityArray) as $buttons){
             foreach ($buttons as $data){
                 $resultArray[] = $data;
             }
