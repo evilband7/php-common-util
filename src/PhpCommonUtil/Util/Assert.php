@@ -178,7 +178,7 @@ class Assert
      */
     public static function isStringOrNull($str){
         if( !is_null($str) && !is_string($str) ){
-            throw \InvalidArgumentException('Parameter $str must be null or string.');
+            throw new \InvalidArgumentException('Parameter $str must be null or string.');
         }
     }
     
