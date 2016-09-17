@@ -3,16 +3,23 @@ namespace PhpCommonUtil\Util;
 
 class StringUtils
 {
+
+    /**
+     * @param $string static
+     * @param $suffix string
+     * @return bool
+     */
+    public static function endsWith($string, $suffix) {
+        $stringLen = strlen($string);
+        $suffixLen = strlen($suffix);
+        if ($suffixLen > $stringLen) return false;
+        return substr_compare($string, $suffix, $stringLen - $suffixLen, $suffixLen) === 0;
+    }
     
     /**
      * Check whether the given String is empty.
-     * <p>This method accepts any Object as an argument, comparing it to
-     * {@code null} and the empty String. As a consequence, this method
-     * will never return {@code true} for a non-null non-String object.
-     * <p>The Object signature is useful for general attribute handling code
-     * that commonly deals with Strings but generally has to iterate over
-     * Objects since attributes may e.g. be primitive value objects as well.
-     * @param str the candidate String
+     * @param $str string
+     * @return bool
      */
     public static function isEmpty($str) {
         Assert::isStringOrNull($str);
@@ -21,16 +28,15 @@ class StringUtils
     
     
     /**
-     * Check that the given CharSequence is neither {@code null} nor of length 0.
-     * Note: Will return {@code true} for a CharSequence that purely consists of whitespace.
-     * <p><pre class="code">
+     * Check that the given String is neither null nor of length 0.
+     * <pre class="code">
      * StringUtils::hasLength(null) = false
      * StringUtils::hasLength("") = false
      * StringUtils::hasLength(" ") = true
      * StringUtils::hasLength("Hello") = true
      * </pre>
-     * @param $str the string to check (may be {@code null})
-     * @return {@code true} if the CharSequence is not null and has length
+     * @param $str string the string to check (may be null)
+     * @return bool true if the given string is not null and has length
      */
     public static function  hasLength($str) {
         Assert::isStringOrNull($str);
@@ -39,18 +45,18 @@ class StringUtils
     
     
     /**
-     * Check whether the given CharSequence has actual text.
-     * More specifically, returns {@code true} if the string not {@code null},
+     * Check whether the given String has actual text.
+     * More specifically, returns true if the string not null,
      * its length is greater than 0, and it contains at least one non-whitespace character.
-     * <p><pre class="code">
-     * StringUtils.hasText(null) = false
-     * StringUtils.hasText("") = false
-     * StringUtils.hasText(" ") = false
-     * StringUtils.hasText("12345") = true
-     * StringUtils.hasText(" 12345 ") = true
+     * <pre class="code">
+     * StringUtils::hasText(null) = false
+     * StringUtils::hasText("") = false
+     * StringUtils::hasText(" ") = false
+     * StringUtils::hasText("12345") = true
+     * StringUtils::hasText(" 12345 ") = true
      * </pre>
-     * @param string $str the CharSequence to check (may be {@code null})
-     * @return {@code true} if the CharSequence is not {@code null},
+     * @param $str string the string to check (may be null)
+     * @return bool true if the givven string is not null,
      * its length is greater than 0, and it does not contain whitespace only
      */
     public static function  hasText($str) {
@@ -67,9 +73,9 @@ class StringUtils
     
     
     /**
-     * Check whether the given CharSequence contains any whitespace characters.
-     * @param str the CharSequence to check (may be {@code null})
-     * @return {@code true} if the CharSequence is not empty and
+     * Check whether the given String contains any whitespace characters.
+     * @param $str string the String to check (may be null})
+     * @return bool true if the CharSequence is not empty and
      * contains at least 1 whitespace character
      */
     public static function containsWhitespace($str) {
@@ -87,8 +93,8 @@ class StringUtils
     
     /**
     * Trim leading and trailing whitespace from the given String.
-    * @param str the String to check
-    * @return the trimmed String
+    * @param $str string the String to check
+    * @return string the trimmed String
     */
     public static function  trimWhitespace($str) {
         if (!self::hasLength($str)) {
@@ -100,12 +106,12 @@ class StringUtils
     /**
      * Trim <i>all</i> whitespace from the given String:
      * leading, trailing, and in between characters.
-     * @param str the String to check
-     * @return the trimmed String
+     * @param $str string the String to check
+     * @return string the trimmed String
      */
     public static function trimAllWhitespace($str) {
         if (!self::hasLength($str)) {
-            return str;
+            return $str;
         }
         $result = '';
         foreach (str_split($str) as $char){
@@ -118,8 +124,8 @@ class StringUtils
     
     /**
      * Trim leading whitespace from the given String.
-     * @param str the String to check
-     * @return the trimmed String
+     * @param $str string the String to check
+     * @return string the trimmed String
      */
     public static function  trimLeadingWhitespace($str) {
         if (!self::hasLength($str)) {
@@ -131,9 +137,8 @@ class StringUtils
     
     /**
      * Trim trailing whitespace from the given String.
-     * @param str the String to check
-     * @return the trimmed String
-     * @see java.lang.Character#isWhitespace
+     * @param $str string the String to check
+     * @return string the trimmed String
      */
     public static function  trimTrailingWhitespace($str) {
         if (!self::hasLength($str)) {
@@ -144,9 +149,9 @@ class StringUtils
     
     /**
      * Trim all occurrences of the supplied leading character from the given String.
-     * @param str the String to check
-     * @param leadingCharacter the leading character to be trimmed
-     * @return the trimmed String
+     * @param $str string the String to check
+     * @param $leadingCharacter string leadingCharacter the leading character to be trimmed
+     * @return string the trimmed String
      */
     public static function trimLeadingCharacter($str, $leadingCharacter) {
         if (!self::hasLength($str)) {
@@ -167,9 +172,9 @@ class StringUtils
     
     /**
      * Trim all occurrences of the supplied trailing character from the given String.
-     * @param str the String to check
-     * @param trailingCharacter the trailing character to be trimmed
-     * @return the trimmed String
+     * @param $str string the String to check
+     * @param $leadingCharacter string the trailing character to be trimmed
+     * @return string the trimmed String
      */
     public static function trimTrailingCharacter($str, $leadingCharacter) {
         if (!self::hasLength($str)) {

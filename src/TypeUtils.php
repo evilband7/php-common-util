@@ -31,10 +31,15 @@ class TypeUtils
      * @return boolean true if $rhs is assignable to $lhs
      */
     public static function isAssignable($lhsType, $rhsType) {
+        if( is_string($lhsType) && is_string($rhsType) && $lhsType===$rhsType){
+            return true;
+        }
         // must be ReflecitonClass
         $rhsType = $rhsType instanceof \ReflectionClass ? $rhsType : new \ReflectionClass($rhsType);
         // must be class name 
         $lhsType = $lhsType instanceof  \ReflectionClass ? $lhsType->getName() : $lhsType;
-        return $lhsType === $rhsType->getName() ||  $rhsType->isSubclassOf($lhsType);
+        /* @var $rhsType \ReflectionClass */
+        /* @var $lhsType \ReflectionClass */
+        return $lhsType->getName() === $rhsType->getName() ||  $rhsType->isSubclassOf($lhsType);
     }
 }

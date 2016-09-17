@@ -105,13 +105,13 @@ class Assert
     
     /**
      * To check if collection is not empty.
-     * @param array|Countable $arrayOrCountabe array or countable object to test
-     * @param string $message Message string to be set into exception.
+     * @param $arrayOrCountable array|\Countable  array or countable object to test
+     * @param $message string Message string to be set into exception.
      * @throws \InvalidArgumentException
      */
-    public static function notEmpty($arrayOrCountabe, $message = '[Assertion failed] - this array or Countable must not be empty: it must contain at least 1 element'){
-        if(is_array($arrayOrCountabe) || ( is_object($arrayOrCountabe) && $arrayOrCountabe instanceof \Countable) ){
-            if(count($arrayOrCountabe) == 0){
+    public static function notEmpty($arrayOrCountable, $message = '[Assertion failed] - this array or Countable must not be empty: it must contain at least 1 element'){
+        if(is_array($arrayOrCountable) || ( is_object($arrayOrCountable) && $arrayOrCountable instanceof \Countable) ){
+            if(count($arrayOrCountable) == 0){
                 throw new \InvalidArgumentException($message);
             }
         }else{
@@ -121,9 +121,9 @@ class Assert
     
     /**
      * To check if a object is instance of a given class or not
-     * @param string|ReflectionClass $type
-     * @param mixed $object
-     * @param string $message Message string to be set into exception.
+     * @param $type string|\ReflectionClass
+     * @param $object mixed
+     * @param $message string Message string to be set into exception.
      * @throws \InvalidArgumentException
      */
     public static function isInstanceOf($type, $object, $message = '')
@@ -144,9 +144,9 @@ class Assert
     
     /**
      * To check if one class is subtype of another class or not.
-     * @param string|ReflectionClass $superType A class name or ReflectionClass of super type you want to test.
-     * @param string|ReflectionClass $subType  A class name or ReflectionClass of sub type you want to test.
-     * @param string $message Message string to be set into exception.
+     * @param $superType string|\ReflectionClass A class name or ReflectionClass of super type you want to test.
+     * @param $subType string|\ReflectionClass   A class name or ReflectionClass of sub type you want to test.
+     * @param $message string Message string to be set into exception.
      * @throws \InvalidArgumentException
      */
     public static function isAssignable($superType, $subType, $message = '')
@@ -162,12 +162,14 @@ class Assert
         }else{
             self::isTrue($superType instanceof  \ReflectionClass, 'SuperType to check against must be class name or ReflcteionClass');
         }
-        
+
         $subType = $subType instanceof \ReflectionClass ? $subType : $subType->getName();
         $superType = $superType instanceof \ReflectionClass ? $superType->getName() : $superType;
-        
+        /* @var $subType \ReflectionClass */
+        /* @var $superType \ReflectionClass */
+
         if ( !( $superType===$subType->getName() || $subType->isSubclassOf($superType) ) ){
-            throw new \InvalidArgumentException($message . $subType->getName() . " is not assignable to " + $superType);
+            throw new \InvalidArgumentException($message . $subType->getName() . " is not assignable to " . $superType->getName());
         }
         
     }
