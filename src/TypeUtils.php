@@ -26,19 +26,19 @@ class TypeUtils
     /**
      * Check if the right-hand side type may be assigned to the left-hand side
      * type following the Java generics rules.
-     * @param string|ReflectionClass $lhsType the target type
-     * @param string|ReflectionClass $rhsType the value type that should be assigned to the target type
-     * @return boolean true if $rhs is assignable to $lhs
+     * @param string|ReflectionClass $toClass the target type
+     * @param string|ReflectionClass $fromClass the value type that should be assigned to the target type
+     * @return boolean true if $fromClass is assignable to $toClass
      */
-    public static function isAssignable($lhsType, $rhsType) {
-        if( is_string($lhsType) && is_string($rhsType) && $lhsType===$rhsType){
+    public static function isAssignable($fromClass, $toClass) {
+        if( is_string($fromClass) && is_string($toClass) && $fromClass===$toClass){
             return true;
         }
-        $rhsType = $rhsType instanceof \ReflectionClass ? $rhsType : new \ReflectionClass($rhsType);
-        $lhsType = $lhsType instanceof  \ReflectionClass ? $lhsType : new \ReflectionClass($lhsType);
+        $toClass = $toClass instanceof \ReflectionClass ? $toClass : new \ReflectionClass($toClass);
+        $fromClass = $fromClass instanceof  \ReflectionClass ? $fromClass : new \ReflectionClass($fromClass);
 
-        /* @var $rhsType \ReflectionClass */
-        /* @var $lhsType \ReflectionClass */
-        return $lhsType->getName() === $rhsType->getName() ||  $rhsType->isSubclassOf($lhsType);
+        /* @var $toClass \ReflectionClass */
+        /* @var $fromClass \ReflectionClass */
+        return $fromClass->getName() === $toClass->getName() ||  $toClass->isSubclassOf($fromClass);
     }
 }
