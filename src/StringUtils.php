@@ -15,7 +15,20 @@ class StringUtils
         if ($suffixLen > $stringLen) return false;
         return substr_compare($string, $suffix, $stringLen - $suffixLen, $suffixLen) === 0;
     }
-    
+
+    /**
+     * @param $string static
+     * @param $prefix string
+     * @return bool
+     */
+    public static function startsWith($string, $prefix) {
+        $stringLen = strlen($string);
+        $prefixLen = strlen($prefix);
+        if ($prefixLen > $stringLen) return false;
+        return substr_compare($string, $prefix, 0, $prefixLen) === 0;
+    }
+
+
     /**
      * Check whether the given String is empty.
      * @param $str string

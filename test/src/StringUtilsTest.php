@@ -16,9 +16,14 @@ class StringUtilsTest extends  BaseTestCase
 {
 
     public function testEndsWith(){
-        $this->assertTrue(StringUtils::endsWith('testtest', 'test'));
-        $this->assertTrue(StringUtils::endsWith('testtest', 'testtest'));
-        $this->assertFalse(StringUtils::endsWith('testtest', 'testtesttesttest'));
+        $this->assertTrue(StringUtils::endsWith('aaabbb', 'bbb'));
+        $this->assertTrue(StringUtils::endsWith('aaabbb', 'aaabbb'));
+        $this->assertFalse(StringUtils::endsWith('aaabbb', 'cccaaabbb'));
+    }
+    public function testStartsWith(){
+        $this->assertTrue(StringUtils::startsWith('aaabbb', 'aaa'));
+        $this->assertTrue(StringUtils::startsWith('aaabbb', 'aaabbb'));
+        $this->assertFalse(StringUtils::startsWith('aaabbb', 'aaabbbccc'));
     }
 
 }
