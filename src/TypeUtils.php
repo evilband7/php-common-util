@@ -34,10 +34,9 @@ class TypeUtils
         if( is_string($lhsType) && is_string($rhsType) && $lhsType===$rhsType){
             return true;
         }
-        // must be ReflecitonClass
         $rhsType = $rhsType instanceof \ReflectionClass ? $rhsType : new \ReflectionClass($rhsType);
-        // must be class name 
-        $lhsType = $lhsType instanceof  \ReflectionClass ? $lhsType->getName() : $lhsType;
+        $lhsType = $lhsType instanceof  \ReflectionClass ? $lhsType : new \ReflectionClass($lhsType);
+
         /* @var $rhsType \ReflectionClass */
         /* @var $lhsType \ReflectionClass */
         return $lhsType->getName() === $rhsType->getName() ||  $rhsType->isSubclassOf($lhsType);
