@@ -39,6 +39,6 @@ class TypeUtils
 
         /* @var $toClass \ReflectionClass */
         /* @var $fromClass \ReflectionClass */
-        return $fromClass->getName() === $toClass->getName() ||  $toClass->isSubclassOf($fromClass);
+        return $fromClass->getName() === $toClass->getName() ||  $fromClass->isSubclassOf($toClass);
     }
 }
